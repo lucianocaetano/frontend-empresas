@@ -79,7 +79,7 @@ export default {
       enterpriseCreate.value = false;
     };
     //Creo que es esto lo que redirige a la info de las empresas
-    api.get("admin/enterprises").then((response) => {
+    api.get("enterprises").then((response) => {
       isLoading.value = false;
       enterpriseStore.setEnterprises(response.data);
     });

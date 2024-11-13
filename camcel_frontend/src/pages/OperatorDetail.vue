@@ -90,7 +90,7 @@ export default {
 
     const handleDeleteClick = () => {
       api
-        .delete(`admin/enterprises/${params.enterprise}/operators/${params.pk}`)
+        .delete(`enterprises/${params.enterprise}/operators/${params.pk}`)
         .then((response) => {
           if (response.status == 200) {
             handleOutClick();
@@ -103,13 +103,13 @@ export default {
     };
 
     api
-      .get(`admin/enterprises/${params.enterprise}/operators/${params.pk}`)
+      .get(`enterprises/${params.enterprise}/operators/${params.pk}`)
       .then((response) => {
         operator.value = response.data.operator;
         if (response.status === 200) {
           api
             .get(
-              `admin/enterprises/${params.enterprise}/operators/${params.pk}/documents`
+              `enterprises/${params.enterprise}/operators/${params.pk}/documents`
             )
             .then((response) => {
               documents.value = response.data.documents;

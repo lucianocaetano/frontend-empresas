@@ -72,7 +72,7 @@ export default {
 
     console.log(id.value);
     api
-      .get(`admin/enterprises/${params.slug}/documents/${id.value}`)
+      .get(`/${params.slug}/documents/${id.value}`)
       .then((response) => {
         if (response.status === 200) {
           doc.value = response.data.document;

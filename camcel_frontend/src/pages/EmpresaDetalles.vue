@@ -133,6 +133,7 @@ import { ref } from "vue";
 import { api_base_backend } from "../helpers.js";
 import { useEnterpriseStore } from "src/store/enterprise.store.js";
 import ViewDocument from "../components/ViewDocument.vue";
+import { useUserStore } from "src/store/user.store.js";
 
 export default {
   components: {
@@ -140,12 +141,12 @@ export default {
     ViewDocument,
   },
   setup() {
-    const route = useRoute();
+   
     const router = useRouter();
 
-    const enterpriseStore = useEnterpriseStore();
-    const { params } = route;
-
+    const userStore = useUserStore();
+    const user = JSON.parse(userStore.user)
+    console.log(user)
     const isLoading = ref(true);
     const empresa = ref(null);
     const operators = ref(null);
@@ -157,22 +158,21 @@ export default {
 
     const handleValidEnterprise = () => {
       api
-        .patch(`admin/enterprises/${params.slug}`, {
+        .patch(`enterprises/${user.enterprise.slug}`, {
           is_valid: true,
         })
         .then((response) => {
           if (response.status === 200) {
-            enterpriseStore.removeEnterprise(params.slug);
-            router.push("/empresas");
+            router.push("/home");
           }
         });
     };
 
     const handleDesvalidEnterprise = () => {
-      api.delete(`admin/enterprises/${params.slug}`).then((response) => {
+      api.delete(`enterprises/${user.enterprise.slug}`).then((response) => {
         if (response.status === 200) {
-          enterpriseStore.removeEnterprise(params.slug);
-          router.push("/empresas");
+
+          router.push("/home");
         }
       });
     };
@@ -195,18 +195,18 @@ export default {
     ];
 
     api
-      .get(`admin/enterprises/${params.slug}`)
+      .get(`enterprises/${user.enterprise.slug}`)
       .then(async (response) => {
         empresa.value = response.data.enterprise;
 
         if (response.status === 200) {
           await api
-            .get(`admin/enterprises/${params.slug}/operators`)
+            .get(`enterprises/${slug}/operators`)
             .then((response) => {
               operators.value = response.data.operators;
             });
           await api
-            .get(`admin/enterprises/${params.slug}/documents`)
+            .get(`/${params.slug}/documents`)
             .then((response) => {
               documents.value = response.data.documents;
             });

@@ -99,7 +99,7 @@ export default {
     const handleUpdateEnterprise = () => {
       api
         .put(
-          "admin/enterprises/" + empresa.value.slug,
+          "/" + empresa.value.slug,
           {
             ...empresa.value,
             user_id: empresa.value.user?.id,

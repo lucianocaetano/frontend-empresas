@@ -14,7 +14,7 @@ const routes = [
   },
   {
     path: "/login/",
-    component: () => import("pages/InicioSesion.vue"),
+    component: () => import("pages/Login.vue"),
   },
   {
     path: "/documentos",
@@ -24,23 +24,13 @@ const routes = [
     ],
   },
   {
-    path: "/empresas/",
+    path: "/home/",
     component: () => import("layouts/MainLayout.vue"),
     children: [
       {
         path: "",
-        component: () => import("src/pages/Empresas.vue"),
-        name: "enterprises",
-      },
-      {
-        path: ":slug/",
         component: () => import("src/pages/EmpresaDetalles.vue"),
-        name: "enterprise-detail",
-      },
-      {
-        path: ":enterprise/operator/:pk/",
-        component: () => import("src/pages/OperatorDetail.vue"),
-        name: "operators-detail",
+        name: "home",
       },
     ],
   },
