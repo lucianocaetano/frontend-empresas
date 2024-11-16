@@ -94,6 +94,7 @@ import { ref } from "vue";
 import Chat from 'src/components/Chat.vue'
 import notificaciones from 'src/components/Notificaciones.vue' 
 import Notificaciones2 from 'src/components/Notificaciones2.vue';
+import { useUserStore } from "src/store/user.store";
 
 export default {
   components: {
@@ -102,12 +103,13 @@ export default {
     Notificaciones2
   },
   setup() {
+    const user = useUserStore()
     const search = ref("");
 
     const menuList = [
       {
         icon: "business_center",
-        label: "Empresa",
+        label: "Mi empresa",
         href: "home",
         separator: false,
       },
@@ -125,10 +127,17 @@ export default {
       },
     ];
 
+
+    const handleLogout = () => {
+      user.setToken(null);
+      user.setAuth(false)
+    };
+
     return {
       drawer: ref(false),
       search,
       menuList,
+      handleLogout
     };
   },
 };
