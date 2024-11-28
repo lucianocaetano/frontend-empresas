@@ -68,7 +68,7 @@
     <add-document
       v-if="showDocumentMenu"
       :show="showAddDocumentMenu"
-      :handleCloseAddDocumentMenu="handleCloseAddDocumentMenu"
+      @handleCloseAddDocumentMenu="handleCloseAddDocumentMenu"
     />
   </div>
 </template>

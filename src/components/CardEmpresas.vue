@@ -2,23 +2,23 @@
   <q-card class="my-card q-mr-md">
     <q-card-section class="q-pa-md text-center">
       <q-avatar size="100px" class="q-mb-md" >
-        <img :src="api_base_backend + empresa.image" />
+        <img :src="`${api_base_backend}/${enterprise.image}`" />
       </q-avatar>
-      <div class="w-full">{{ empresa.nombre }}</div>
+      <div class="w-full">{{ enterprise.nombre }}</div>
     </q-card-section>
     <q-card-section class="q-pa-md">
-      <div class="text-caption text-grey">{{ empresa.descripcion }}</div>
+      <div class="text-caption text-grey">{{ enterprise.descripcion }}</div>
     </q-card-section>
     <q-card-section class="text-right row items-center justify-between">
       <div class="text-caption text-grey">
-        {{ empresa.is_valid? "Verificado" : "No verificado" }}
+        {{ enterprise.is_valid? "Verificado" : "No verificado" }}
         <q-icon
-          :name="empresa.is_valid? 'check_circle' : 'cancel'"
-          :color="empresa.is_valid? 'green' : 'red'"
+          :name="enterprise.is_valid? 'check_circle' : 'cancel'"
+          :color="enterprise.is_valid? 'green' : 'red'"
           size="30px"
         />
       </div>
-      <router-link class="text-md" :to="{name: 'enterprise-detail', params: {slug: empresa.slug}}">
+      <router-link class="text-md" :to="{name: 'enterprise-detail', params: {slug: enterprise.slug}}">
         <q-icon name="arrow_forward" size="20px" />
       </router-link>
     </q-card-section>
@@ -29,7 +29,7 @@
 import { api_base_backend } from "../helpers.js"
 
 export default {
-  props: ["empresa"],
+  props: ["enterprise"],
   setup() {
 
     return {api_base_backend}

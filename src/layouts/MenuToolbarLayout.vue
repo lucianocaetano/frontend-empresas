@@ -9,20 +9,19 @@
       <div>
         <q-toolbar class="row items-center">
           <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
+          <q-toolbar-title
+            class="q-mx-auto"
+            style="display: flex; justify-content: center"
+          >
+            <img
+              src="src/assets/LogoCamcel.jpg"
+              alt="Logo Camcel"
+              width="287"
+              height="65"
+            />
+          </q-toolbar-title>
         </q-toolbar>
       </div>
-
-      <q-toolbar-title
-        class="q-mx-auto"
-        style="display: flex; justify-content: center"
-      >
-        <img
-          src="src/assets/LogoCamcel.jpg"
-          alt="Logo Camcel"
-          width="287"
-          height="65"
-        />
-      </q-toolbar-title>
 
       <div class="row">
         <Notificaciones2 />
@@ -91,19 +90,19 @@
 
 <script>
 import { ref } from "vue";
-import Chat from 'src/components/Chat.vue'
-import notificaciones from 'src/components/Notificaciones.vue' 
-import Notificaciones2 from 'src/components/Notificaciones2.vue';
+import Chat from "src/components/Chat.vue";
+import notificaciones from "src/components/Notificaciones.vue";
+import Notificaciones2 from "src/components/Notificaciones2.vue";
 import { useUserStore } from "src/store/user.store";
 
 export default {
   components: {
     Chat,
     notificaciones,
-    Notificaciones2
+    Notificaciones2,
   },
   setup() {
-    const user = useUserStore()
+    const user = useUserStore();
     const search = ref("");
 
     const menuList = [
@@ -127,17 +126,16 @@ export default {
       },
     ];
 
-
     const handleLogout = () => {
       user.setToken(null);
-      user.setAuth(false)
+      user.setAuth(false);
     };
 
     return {
       drawer: ref(false),
       search,
       menuList,
-      handleLogout
+      handleLogout,
     };
   },
 };
